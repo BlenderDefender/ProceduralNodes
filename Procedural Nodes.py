@@ -22,10 +22,12 @@ from os.path import expanduser
 import bpy
 
 import os
+from os.path import expanduser
 
 # Declare Blender Full version name and Blender Folder version name string:
 bl_vs_full = bpy.app.version_string
 bl_vs_folder = ""
+user_name = expanduser("~")
 
 
 # Modify bl_vs_full to Output a shortened path:
@@ -34,9 +36,12 @@ for i in range(0, len(bl_vs_full)):
         bl_vs_folder = bl_vs_folder + bl_vs_full[i]
 
 # Join the path to be the Addons-Directory path:
-bl_addons_folder = os.path.join(os.path.join(
-    os.environ['USERPROFILE']), 'AppData', 'Roaming', 'Blender Foundation', 'Blender', bl_vs_folder, 'scripts', 'addons')
+bl_addons_folder = os.path.join(user_name, 'AppData', 'Roaming',
+                                'Blender Foundation', 'Blender', bl_vs_folder, 'scripts', 'addons')
 
+# /home/<user>/.config/blender/<version>/scripts/addons --> Linux
+# C:\Users\<user>\AppData\Roaming\Blender Foundation\Blender\<version>\scripts\addons --> Windows
+# /Users/$USER/Library/Application Support/Blender/version/??????? --> unsure, MacOS
 
 print("The Addons Directory path is: " + bl_addons_folder)
 
