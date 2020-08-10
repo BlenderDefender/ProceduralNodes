@@ -18,8 +18,26 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import bpy
+
 # -----------------------------------------------------------------------------
 # Test: Get the current user.
 from os.path import expanduser
 home = expanduser("~")
 print(home)
+
+# -----------------------------------------------------------------------------
+# Test: Get the current Blender version without the subversion.
+input_str = bpy.app.version_string
+
+# Printing original string
+print("Original string: " + input_str)
+
+result_str = ""
+
+for i in range(0, len(input_str)):
+    if i < 4:
+        result_str = result_str + input_str[i]
+
+# Printing string after removal
+print("String after removal of i'th character : " + result_str)
