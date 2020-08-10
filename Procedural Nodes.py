@@ -18,29 +18,33 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+from os.path import expanduser
 import bpy
+
+import os
+
+# Declare Blender Full version name and Blender Folder version name string:
+bl_vs_full = bpy.app.version_string
+bl_vs_folder = ""
+
+
+# Modify bl_vs_full to Output a shortened path:
+for i in range(0, len(bl_vs_full)):
+    if i < 4:
+        bl_vs_folder = bl_vs_folder + bl_vs_full[i]
+
+# Join the path to be the Addons-Directory path:
+bl_addons_folder = os.path.join(os.path.join(
+    os.environ['USERPROFILE']), 'AppData', 'Roaming', 'Blender Foundation', 'Blender', bl_vs_folder, 'scripts', 'addons')
+
+
+print("The Addons Directory path is: " + bl_addons_folder)
+
 
 # -----------------------------------------------------------------------------
 # Test: Get the current user.
-from os.path import expanduser
 home = expanduser("~")
 print(home)
-
-# -----------------------------------------------------------------------------
-# Test: Get the current Blender version without the subversion.
-input_str = bpy.app.version_string
-
-# Printing original string
-print("Original string: " + input_str)
-
-result_str = ""
-
-for i in range(0, len(input_str)):
-    if i < 4:
-        result_str = result_str + input_str[i]
-
-# Printing string after removal
-print("String after removal of i'th character : " + result_str)
 
 # -----------------------------------------------------------------------------
 # Test: Load a text from a .blend File.
