@@ -41,3 +41,16 @@ for i in range(0, len(input_str)):
 
 # Printing string after removal
 print("String after removal of i'th character : " + result_str)
+
+# -----------------------------------------------------------------------------
+# Test: Load a text from a .blend File.
+filepath = "//untitled.blend"
+
+
+# load all texts
+with bpy.data.libraries.load(filepath) as (data_from, data_to):
+    text = [name for name in data_from.texts if name.endswith("y")]
+
+print(text[0])
+
+# data_from.texts
