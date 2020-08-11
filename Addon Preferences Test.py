@@ -40,7 +40,18 @@ class ExampleAddonPreferences(AddonPreferences):
         layout.prop(self, "filepath")
         layout.prop(self, "number")
         layout.prop(self, "boolean")
+        layout.operator("addongen.hallo_world_operator")
 
+
+class HelloWorldOperator(bpy.types.Operator):
+    """ToolTip of HelloWorldOperator"""
+    bl_idname = "addongen.hallo_world_operator"
+    bl_label = "Hello World Operator"
+    bl_options = {'REGISTER'}
+
+    def execute(self, context):
+        self.report({'INFO'}, "Hello World!")
+        return {'FINISHED'}
 
 # class OBJECT_OT_addon_prefs_example(Operator):
 #    """Display example preferences"""
@@ -63,10 +74,10 @@ class ExampleAddonPreferences(AddonPreferences):
 
 # Registration
 def register():
-    #    bpy.utils.register_class(OBJECT_OT_addon_prefs_example)
+    bpy.utils.register_class(HelloWorldOperator)
     bpy.utils.register_class(ExampleAddonPreferences)
 
 
 def unregister():
-    #    bpy.utils.unregister_class(OBJECT_OT_addon_prefs_example)
+    bpy.utils.unregister_class(HelloWorldOperator)
     bpy.utils.unregister_class(ExampleAddonPreferences)
