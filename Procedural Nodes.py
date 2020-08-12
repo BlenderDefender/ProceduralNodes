@@ -41,8 +41,8 @@ for i in range(0, len(bl_vs_full)):
 
 # Join the path to be the Addons-Directory path:
 if operating_system == "Windows":
-    dirpath = os.path.join(user_name, 'AppData', 'Roaming',
-                           'Blender Foundation', 'Blender', bl_vs_folder, 'scripts', 'addons')
+    dirpath = os.path.join(user_name, 'AppData', 'Roaming', 'Blender Foundation',
+                           'Blender', bl_vs_folder, 'scripts', 'addons', 'dest.blend')
 elif operating_system == "Linux":
     dirpath = os.path.join('home', user_name, '.config',
                            'blender', bl_vs_folder, 'scripts', 'addons')
@@ -56,10 +56,28 @@ else:
 # The destination file name is missing here. There are two possibilities: 1. When copying the file, the same filename as the source file will be used or 2. a random filename with a 6-digit number will be assigned.
 destination = dirpath
 # This is the path that should be entered later in the preferences.
-source = os.path.join(user_name, 'Desktop', 'Eye.blend')
-# print(source)
-shutil.copy(source, destination)
-# --> Copies the Source file to destination file.
+source = os.path.join(user_name, 'Desktop', 'untitled.blend')
+print(source)
+
+try:
+    shutil.copy(source, destination)
+    # --> Copies the Source file to destination file.
+    print("File copied successfully.")
+
+# If source and destination are same
+except shutil.SameFileError:
+    print("File already installed.")
+
+# If there is any permission issue
+except PermissionError:
+    print("Permission denied.")
+
+# If source or destination doesn't Exist.
+except IOError as e:
+    print('Error: %s' % e.strerror)
+# For other errors
+except:
+    print("Error occurred while installing file.")
 
 
 # -----------------------------------------------------------------------------
