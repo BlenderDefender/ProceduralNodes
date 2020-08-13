@@ -30,19 +30,6 @@ import shutil
 
 import platform
 
-# -----------------------------------------------------------------------------
-# Test: Load a text from a .blend File.
-filepath = "//untitled.blend"
-
-
-# load all texts
-with bpy.data.libraries.load(filepath) as (data_from, data_to):
-    text = [name for name in data_from.texts if name.endswith("y")]
-
-print(text[0])
-
-# data_from.texts
-
 
 class OT_InstallFile(Operator, ImportHelper):
 
@@ -77,45 +64,71 @@ class OT_InstallFile(Operator, ImportHelper):
         else:
             dirpath = ""
         # -----------------------------------------------------------------------------
+        if extension == ".blend":
+            with bpy.data.libraries.load(source) as (data_from, data_to):
 
-         # The destination file name is missing here. There are two possibilities: 1. When copying the file, the same filename as the source file will be used or 2. a random filename with a 6-digit number will be assigned.
+                texts = [
+                    name for name in data_from.texts if name.endswith("f")]
 
-        if dirpath != "" and extension == ".blend":
+        try:
+            lck = texts[0]
+
+        except:
+            #            print("File is not licensed")
+            lck = "00000000"
+
+#        print(lck)
+
+        if lck.find("°j4C") == -1:
+            if lck.find("8yl!") == -1:
+                if lck.find("5c*7") == -1:
+                    verified = "False"
+                else:
+                    verified = "True"
+            else:
+                verified = "True"
+        else:
+            verified = "True"
+
+        if dirpath != "" and extension == ".blend" and verified == "True":
 
             try:
                 destination = dirpath
-                # --> Copies the Source file to destination file.
                 shutil.copy(source, destination)
-                print("File installed successfully.")
+                # --> Copies the Source file to destination file.
+#                print("File installed successfully.")
                 self.report({'INFO'}, "File installed successfully.")
 
             # If source and destination are same
             except shutil.SameFileError:
-                print("File already installed.")
+                #                print("File already installed.")
                 self.report({'WARNING'}, "File already installed.")
 
             # If there is any permission issue
             except PermissionError:
-                print("Permission denied.")
+                #                print("Permission denied.")
                 self.report({'ERROR'}, "Permission denied.")
 
             # If source or destination doesn't Exist.
             except IOError as e:
-                print('Error: %s' % e.strerror)
+                #                 print('Error: %s' % e.strerror)
                 self.report({'ERROR'}, 'Error: %s' % e.strerror)
             # For other errors
             except:
-                print("Error occurred while installing file.")
+                #                print("Error occurred while installing file.")
                 self.report({'ERROR'}, "Error occurred while installing file.")
         elif extension != ".blend":
-            print("Wrong file format!")
-            self.report({'ERROR'}, "Wrong file format!")
+            #            print("Wrong file format!")
+            self.report({'ERROR'}, "The file must be a .blend file!")
 
         elif dirpath == "":
-            print(
-                "Your Operating system is not supported yet. Please open a OS-Request on GitHub.")
+            #            print("Your Operating system is not supported yet. Please open a OS-Request on GitHub.")
             self.report(
                 {'WARNING'}, "Your Operating system is not supported yet. Please open a OS-Request on GitHub.")
+
+        elif verified == "False":
+            #            print("Your file is not licensed!")
+            self.report({'ERROR'}, "Your file is not licensed!")
 
 
 #        print('Selected file:', self.filepath)
