@@ -25,6 +25,7 @@ from bpy.props import (
 from bpy.types import (
     Operator,
     Menu,
+    AddonPreferences,
 )
 
 from bpy_extras.io_utils import ImportHelper
@@ -245,7 +246,7 @@ class OT_InstallFile(Operator, ImportHelper):
         bl_vs_folder = ""
         user_name = expanduser("~")
         operating_system = platform.system()
-        dirpath = node_path()
+        dirpath = node_path(context)
 
         # -----------------------------------------------------------------------------
         if extension == ".blend":
@@ -321,6 +322,17 @@ class OT_InstallFile(Operator, ImportHelper):
 #        print(source)
 
         return {'FINISHED'}
+
+
+class ExampleAddonPreferences(AddonPreferences):
+    # this must match the add-on name, use '__package__'
+    # when defining this in a submodule of a python package.
+    bl_idname = __name__
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout.operator("test.install_file")
 
 
 def menu_func(self, context):
