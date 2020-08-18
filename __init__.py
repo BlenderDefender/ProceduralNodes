@@ -1,11 +1,11 @@
 # ##### BEGIN GPL LICENSE BLOCK #####
 #
-#    Copyright (C) <2020>  <Blender Defender>
+#  Copyright (C) <2020>  <Blender Defender>
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
-#  as published by the Free Software Foundation; either version 3
-#  of the License, or (at your option) any later version.
+#  as published by the Free Software Foundation; version 3
+#  of the License.
 #
 #  This program is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,40 +18,45 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
-import bpy
+from . import addon_updater_ops
+from bpy_extras.io_utils import ImportHelper
 from bpy.props import (
     StringProperty,
+    BoolProperty,
 )
 from bpy.types import (
     Operator,
     Menu,
     AddonPreferences,
 )
-
-from bpy_extras.io_utils import ImportHelper
-
-import os
-from os.path import expanduser
-
-import shutil
-
+import bpy
 import platform
-
+import shutil
+from os.path import expanduser
+import os
 bl_info = {
     "name": "Procedural Nodes",
     "description": "Useful and cool node groups",
     "author": "Blender Defender",
     "version": (1, 0),
     "blender": (2, 80, 0),
-    "location": "Node Editors > Add > BD",
-    "description": "Add node groups directly to the node editors",
+    "location": "Node Editors > Add > Procedural Nodes",
+    "description": "Add pre-made node groups to the node editors",
     "warning": "",
     "doc_url": "",
     "category": "Node",
 }
 
+# -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
 
 # Node Adding Operator
+
+
 def node_center(context):
     from mathutils import Vector
     loc = Vector((0.0, 0.0))
@@ -130,24 +135,17 @@ def node_path(context):
 
     # Join the path to be the Addons-Directory path:
     if operating_system == "Windows":
-        dirpath = os.path.join(user_name, 'AppData', 'Roaming',
-                               'Blender Foundation', 'Blender', bl_vs_folder, 'scripts', 'addons')
-    elif operating_system == "Linux":
-        dirpath = os.path.join('home', user_name, '.config',
-                               'blender', bl_vs_folder, 'scripts', 'addons')
-    elif operating_system == "Darwin":
-        dirpath = ""
-    else:
-        dirpath = ""
+        dirpath = os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), 'data')
 
     return dirpath
 
 
-class NODE_OT_Test(Operator):
-    """Add a node template"""
-    bl_idname = "node.ot_test"
-    bl_label = "Add node group template"
-    bl_description = "Add node group template"
+class PROCEDURALNODES_OT_add_group(Operator):
+    """Add a pre-made Node Group"""
+    bl_idname = "proceduralnodes.add_group"
+    bl_label = "Add pre-made Node Group"
+    bl_description = "Add pre-made Node Group"
     bl_options = {'REGISTER', 'UNDO'}
 
     filepath: StringProperty(
@@ -201,8 +199,8 @@ node_template_cache._node_cache = []
 node_template_cache._node_cache_path = ""
 
 
-class NODE_MT_Test(Menu):
-    bl_label = "Node Template"
+class PROCEDURALNODES_MT_main_menu(Menu):
+    bl_label = "Node Groups"
 
     def draw(self, context):
         layout = self.layout
@@ -221,7 +219,7 @@ class NODE_MT_Test(Menu):
 
         for filepath, group_name in node_items:
             props = layout.operator(
-                NODE_OT_Test.bl_idname,
+                PROCEDURALNODES_OT_add_group.bl_idname,
                 text=group_name,
             )
             props.filepath = filepath
@@ -230,9 +228,9 @@ class NODE_MT_Test(Menu):
 
 # -----------------------------------------------------------------------------
 # Install licensed file
-class OT_InstallFile(Operator, ImportHelper):
-
-    bl_idname = "test.install_file"
+class PROCEDURALNODES_OT_InstallFile(Operator, ImportHelper):
+    """Install a licensed .blend file for Procedural Nodes."""
+    bl_idname = "proceduralnodes.install_file"
     bl_label = "Install Procedural Nodes file"
 
     def execute(self, context):
@@ -311,34 +309,72 @@ class OT_InstallFile(Operator, ImportHelper):
 # Addon Preferences
 
 
-class ProceduralNodesPreferences(AddonPreferences):  # Procedural Nodes
-    # this must match the add-on name, use '__package__'
-    # when defining this in a submodule of a python package.
-    bl_idname = __name__
+class PROCEDURALNODES_APT_preferences(AddonPreferences):  # Procedural Nodes
+    bl_idname = __package__
+
+    # addon updater preferences
+
+    auto_check_update = bpy.props.BoolProperty(
+        name="Auto-check for Update",
+        description="If enabled, auto-check for updates using an interval",
+        default=False,
+    )
+    updater_intrval_months = bpy.props.IntProperty(
+        name='Months',
+        description="Number of months between checking for updates",
+        default=0,
+        min=0
+    )
+    updater_intrval_days = bpy.props.IntProperty(
+        name='Days',
+        description="Number of days between checking for updates",
+        default=7,
+        min=0,
+        max=31
+    )
+    updater_intrval_hours = bpy.props.IntProperty(
+        name='Hours',
+        description="Number of hours between checking for updates",
+        default=0,
+        min=0,
+        max=23
+    )
+    updater_intrval_minutes = bpy.props.IntProperty(
+        name='Minutes',
+        description="Number of minutes between checking for updates",
+        default=0,
+        min=0,
+        max=59
+    )
 
     def draw(self, context):
         layout = self.layout
+        mainrow = layout.row()
+        col = mainrow.column()
 
-        layout.operator("test.install_file")
+        addon_updater_ops.update_settings_ui(self, context)
+
+        layout.operator("proceduralnodes.install_file")
 
 
 def menu_func(self, context):
     self.layout.menu(
-        NODE_MT_Test.__name__,
+        PROCEDURALNODES_MT_main_menu.__name__,
         text="Procedural Nodes",
         icon='PRESET_NEW',
     )
 
 
 classes = (
-    NODE_OT_Test,
-    NODE_MT_Test,
-    OT_InstallFile,
-    ProceduralNodesPreferences,
+    PROCEDURALNODES_OT_add_group,
+    PROCEDURALNODES_OT_InstallFile,
+    PROCEDURALNODES_MT_main_menu,
+    PROCEDURALNODES_APT_preferences,
 )
 
 
 def register():
+    addon_updater_ops.register(bl_info)
     for cls in classes:
         bpy.utils.register_class(cls)
 
@@ -346,6 +382,7 @@ def register():
 
 
 def unregister():
+    addon_updater_ops.unregister()
     for cls in classes:
         bpy.utils.unregister_class(cls)
 
