@@ -135,8 +135,7 @@ def node_path(context):
             bl_vs_folder = bl_vs_folder + bl_vs_full[i] 
    
     # Join the path to be the Addons-Directory path:
-    if operating_system == "Windows":        
-        dirpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+    dirpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 
 
     return dirpath
