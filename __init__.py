@@ -18,8 +18,7 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
-from . import addon_updater_ops
-from bpy_extras.io_utils import ImportHelper
+import bpy
 from bpy.props import (
     StringProperty,
     BoolProperty,
@@ -29,11 +28,17 @@ from bpy.types import (
     Menu,
     AddonPreferences,
 )
-import bpy
-import platform
-import shutil
-from os.path import expanduser
+from bpy_extras.io_utils import ImportHelper
+
 import os
+from os.path import expanduser
+
+import shutil
+
+import platform
+
+from . import addon_updater_ops
+
 bl_info = {
     "name": "Procedural Nodes",
     "description": "Useful and cool node groups",
@@ -47,16 +52,8 @@ bl_info = {
     "category": "Node",
 }
 
-# -----------------------------------------------------------------------------
-
-
-# -----------------------------------------------------------------------------
-
-# -----------------------------------------------------------------------------
 
 # Node Adding Operator
-
-
 def node_center(context):
     from mathutils import Vector
     loc = Vector((0.0, 0.0))
@@ -134,9 +131,7 @@ def node_path(context):
             bl_vs_folder = bl_vs_folder + bl_vs_full[i]
 
     # Join the path to be the Addons-Directory path:
-    if operating_system == "Windows":
-        dirpath = os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), 'data')
+    dirpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 
     return dirpath
 
