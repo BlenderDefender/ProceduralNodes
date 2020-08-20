@@ -26,7 +26,7 @@ bl_info = {
     "blender": (2, 80, 0),
     "location": "Node Editors > Add > Procedural Nodes",
     "description": "Add pre-made node groups to the node editors",
-    "warning": "",
+    "warning": "Check Out Gumroad for extension packs and more",
     "doc_url": "",
     "category": "Node",
 }
@@ -306,6 +306,20 @@ class PROCEDURALNODES_OT_InstallFile(Operator, ImportHelper):
         
         return {'FINISHED'} 
 
+
+class PROCEDURALNODES_OT_CheckGumroad(bpy.types.Operator):
+    """Checkout Gumroad for more cool Addons and Blender Files"""
+    bl_idname = "proceduralnodes.check_gumroad"
+    bl_label = "Checkout Gumroad for extension packs and more..."
+    bl_options = {'REGISTER'}
+
+    
+    def execute(self, context):
+        bpy.ops.wm.url_open(url="https://gumroad.com/blenderdefender")
+        return {'FINISHED'}
+
+
+
 # -----------------------------------------------------------------------------
 # Addon Preferences
 class PROCEDURALNODES_APT_preferences(AddonPreferences):  #Procedural Nodes
@@ -351,6 +365,7 @@ class PROCEDURALNODES_APT_preferences(AddonPreferences):  #Procedural Nodes
         layout = self.layout
         mainrow = layout.row()
         col = mainrow.column()
+        layout.operator("proceduralnodes.check_gumroad", icon='FUND')
         
         addon_updater_ops.update_settings_ui(self, context)
         
@@ -369,6 +384,7 @@ def menu_func(self, context):
 classes = (
     PROCEDURALNODES_OT_add_group,
     PROCEDURALNODES_OT_InstallFile,
+    PROCEDURALNODES_OT_CheckGumroad,
     PROCEDURALNODES_MT_main_menu,
     PROCEDURALNODES_APT_preferences,
 )
