@@ -44,7 +44,6 @@ class PROCEDURALNODES_MT_main_menu(Menu):
 
     def draw(self, context):
         layout = self.layout
-        
 
         dirpath = node_path(context)
         if dirpath == "":
@@ -66,9 +65,11 @@ class PROCEDURALNODES_MT_main_menu(Menu):
             props.filepath = filepath
             props.group_name = group_name
 
+
 classes = (
     PROCEDURALNODES_MT_main_menu,
 )
+
 
 def register():
     operators.register()

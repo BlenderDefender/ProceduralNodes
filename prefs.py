@@ -20,53 +20,50 @@ from . import addon_updater_ops
 
 # -----------------------------------------------------------------------------
 # Addon Preferences
-class PROCEDURALNODES_APT_preferences(AddonPreferences):  #Procedural Nodes
+class PROCEDURALNODES_APT_preferences(AddonPreferences):
     bl_idname = __package__
-    
-        # addon updater preferences
 
     auto_check_update = bpy.props.BoolProperty(
         name="Auto-check for Update",
         description="If enabled, auto-check for updates using an interval",
         default=False,
-        )
+    )
     updater_intrval_months = bpy.props.IntProperty(
         name='Months',
         description="Number of months between checking for updates",
         default=0,
         min=0
-        )
+    )
     updater_intrval_days = bpy.props.IntProperty(
         name='Days',
         description="Number of days between checking for updates",
         default=7,
         min=0,
         max=31
-        )
+    )
     updater_intrval_hours = bpy.props.IntProperty(
         name='Hours',
         description="Number of hours between checking for updates",
         default=0,
         min=0,
         max=23
-        )
+    )
     updater_intrval_minutes = bpy.props.IntProperty(
         name='Minutes',
         description="Number of minutes between checking for updates",
         default=0,
         min=0,
         max=59
-        )
+    )
 
-    
     def draw(self, context):
         layout = self.layout
         mainrow = layout.row()
         col = mainrow.column()
         layout.operator("proceduralnodes.check_gumroad", icon='FUND')
-        
+
         addon_updater_ops.update_settings_ui(self, context)
-        
+
         layout.operator("proceduralnodes.install_file")
 
 
@@ -81,8 +78,7 @@ def register():
         bpy.utils.register_class(cls)
 
 
-
 def unregister():
-    addon_updater_ops.unregister() 
+    addon_updater_ops.unregister()
     for cls in classes:
         bpy.utils.unregister_class(cls)

@@ -31,18 +31,8 @@ bl_info = {
     "category": "Node",
 }
 
-# -----------------------------------------------------------------------------
-import os 
-from os.path import expanduser
-
-import shutil
-import platform
-
-# -----------------------------------------------------------------------------
 import bpy
 
-
-# -----------------------------------------------------------------------------
 from . import (
     menus,
     prefs,
@@ -64,8 +54,8 @@ def register():
 
 
 def unregister():
-    menus.unregister()   
-    prefs.unregister()   
+    menus.unregister()
+    prefs.unregister()
     bpy.types.NODE_MT_add.remove(menu_func)
 
 
