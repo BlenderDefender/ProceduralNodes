@@ -21,10 +21,8 @@ bl_info = {
 
 # -----------------------------------------------------------------------------
 # Addon Preferences
-class PROCEDURALNODES_APT_preferences(AddonPreferences):  # Procedural Nodes
+class PROCEDURALNODES_APT_preferences(AddonPreferences):
     bl_idname = __package__
-
-    # addon updater preferences
 
     auto_check_update = bpy.props.BoolProperty(
         name="Auto-check for Update",
