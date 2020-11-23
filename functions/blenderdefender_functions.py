@@ -19,7 +19,6 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
-
 from .dict.dict import decoding
 
 
