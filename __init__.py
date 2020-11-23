@@ -33,12 +33,12 @@ bl_info = {
     "name": "Procedural Nodes",
     "description": "Useful and cool node groups",
     "author": "Blender Defender",
-    "version": (1, 0, 0),
+    "version": (1, 1, 0),
     "blender": (2, 80, 0),
     "location": "Node Editors > Add > Procedural Nodes",
     "description": "Add pre-made node groups to the node editors",
     "warning": "Check Out Gumroad for extension packs and more",
-    "doc_url": "",
+    "tracker_url": "https://github.com/BlenderDefender/ProceduralNodes/issues",
     "category": "Node",
 }
 
