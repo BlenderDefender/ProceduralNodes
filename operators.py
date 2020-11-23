@@ -19,8 +19,9 @@ from .functions.main_functions import (
     node_template_add,
 )
 
+from .functions.blenderdefender_functions import upgrade
 
-# Node Adding Operator
+
 class PROCEDURALNODES_OT_add_group(Operator):
     """Add a pre-made Node Group"""
     bl_idname = "proceduralnodes.add_group"
@@ -122,21 +123,44 @@ class PROCEDURALNODES_OT_InstallFile(Operator, ImportHelper):
         return {'FINISHED'}
 
 
-class PROCEDURALNODES_OT_CheckGumroad(Operator):
-    """Checkout Gumroad for more cool Addons and Blender Files"""
-    bl_idname = "proceduralnodes.check_gumroad"
-    bl_label = "Checkout Gumroad for extension packs and more..."
-    bl_options = {'REGISTER'}
+class PROCEDURALNODES_OT_upgrade(Operator):
+    """Upgrade from free to donation version"""
+    bl_idname = "proceduralnodes.upgrade"
+    bl_label = "Upgrade!"
+
+    password: StringProperty(name="")
 
     def execute(self, context):
-        bpy.ops.wm.url_open(url="https://gumroad.com/blenderdefender")
+        """Upgrade to donation version"""
+        from .functions.dict.dict import decoding
+        import os
+
+        self.report({'INFO'}, upgrade(os.path.join(os.path.expanduser("~"),
+                                                   "Blender Addons Data",
+                                                   "io-voodoo-tracks",
+                                                   "data.blenderdefender"),
+                                      decoding,
+                                      self.password))
         return {'FINISHED'}
+
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self)
+
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "password")
+        layout.label(text="Please enter your passcode. Don't have one?")
+        layout.operator(
+            "wm.url_open", text="Get one!").url = "https://gumroad.com/l/ImportVoodooCameraTracks"
+        layout.label(text="Didn't receive Email with passcode?")
+        layout.label(text="Please open an issue on GitHub.")
+        layout.label(text="I will help as soon as possible!")
 
 
 classes = (
     PROCEDURALNODES_OT_add_group,
     PROCEDURALNODES_OT_InstallFile,
-    PROCEDURALNODES_OT_CheckGumroad,
+    PROCEDURALNODES_OT_upgrade,
 )
 
 

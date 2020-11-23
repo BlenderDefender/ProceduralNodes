@@ -25,6 +25,10 @@ from . import (
     prefs,
 )
 
+from .functions.blenderdefender_functions import setup_addons_data, decode
+from .functions.dict.dict import decoding
+
+
 bl_info = {
     "name": "Procedural Nodes",
     "description": "Useful and cool node groups",
@@ -48,6 +52,27 @@ def menu_func(self, context):
 
 
 def register():
+    import os
+    import shutil
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "procedural-nodes")
+    if not os.path.isdir(path):
+        os.makedirs(path)
+    shutil.copyfile(os.path.join(list(os.path.split(os.path.abspath(__file__)))[0],
+                                 "functions",
+                                 "data.blenderdefender"),
+                    os.path.join(os.path.expanduser("~"),
+                                 "Blender Addons Data",
+                                 "procedural-nodes",
+                                 "data.blenderdefender"))
+
+    data = decode(os.path.join(os.path.expanduser("~"),
+                               "Blender Addons Data",
+                               "procedural-nodes",
+                               "data.blenderdefender"),
+                  decoding)
+    setup_addons_data(data[1])
+
     menus.register()
     prefs.register()
     bpy.types.NODE_MT_add.append(menu_func)

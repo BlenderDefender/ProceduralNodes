@@ -5,6 +5,8 @@ from bpy.types import AddonPreferences
 # -----------------------------------------------------------------------------
 from . import addon_updater_ops
 
+from .functions.blenderdefender_functions import check_free_donation_version
+
 bl_info = {
     "name": "Procedural Nodes",
     "description": "Useful and cool node groups",
@@ -27,7 +29,7 @@ class PROCEDURALNODES_APT_preferences(AddonPreferences):
     auto_check_update = bpy.props.BoolProperty(
         name="Auto-check for Update",
         description="If enabled, auto-check for updates using an interval",
-        default=False,
+        default=True,
     )
     updater_intrval_months = bpy.props.IntProperty(
         name='Months',
@@ -61,11 +63,35 @@ class PROCEDURALNODES_APT_preferences(AddonPreferences):
         layout = self.layout
         mainrow = layout.row()
         col = mainrow.column()
-        layout.operator("proceduralnodes.check_gumroad", icon='FUND')
+
+        if check_free_donation_version() == "free":
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
+                            icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(
+                text="Procedural Nodes - You are using the free version.")
+            layout.label(
+                text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
+            layout.operator("proceduralnodes.upgrade")
+            layout.label(text="")
+        elif check_free_donation_version() == "donation":
+            layout.label(
+                text="Procedural Nodes - You are using the donation version. Thank you :)", icon='FUND')
+            layout.operator(
+                "wm.url_open", text="Get discount code for cool Blender Products").url = "https://linktr.ee/5akW_ZE56dHsjaA"
+        elif check_free_donation_version() == "database_file_corrupted":
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
+                            icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(
+                text="Procedural Nodes - Databasefile corrupted! Please delete it.")
+            layout.label(
+                text="And please, stop messing around with .db files. Thanks :)")
+            layout.operator("proceduralnodes.upgrade",
+                            text="Upgrade to donation version.")
+            layout.label(text="")
+
+        layout.operator("proceduralnodes.install_file", icon="IMPORT")
 
         addon_updater_ops.update_settings_ui(self, context)
-
-        layout.operator("proceduralnodes.install_file")
 
 
 classes = (
