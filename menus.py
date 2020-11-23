@@ -3,13 +3,10 @@ import os
 
 from bpy.types import Menu
 
-from .functions.main_functions import (
-    node_center,
-    node_path,
-    node_template_add,
-)
+from .functions.main_functions import node_path
 
 from . import operators
+
 
 def node_template_cache(context, *, reload=False):
     dirpath = node_path(context)
