@@ -24,7 +24,7 @@ from bpy.types import AddonPreferences
 # -----------------------------------------------------------------------------
 from . import addon_updater_ops
 
-from .functions.blenderdefender_functions import check_free_donation_version
+from .functions.blenderdefender_functions import check_free_donation_version, url
 
 bl_info = {
     "name": "Procedural Nodes",
@@ -96,7 +96,7 @@ class PROCEDURALNODES_APT_preferences(AddonPreferences):
             layout.label(
                 text="Procedural Nodes - You are using the donation version. Thank you :)", icon='FUND')
             layout.operator(
-                "wm.url_open", text="Get discount code for cool Blender Products").url = "https://linktr.ee/5akW_ZE56dHsjaA"
+                "wm.url_open", text="Get discount code for cool Blender Products").url = url()
         elif check_free_donation_version() == "database_file_corrupted":
             layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
                             icon='FUND').url = "https://gumroad.com/blenderdefender"
