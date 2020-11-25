@@ -86,6 +86,6 @@ def node_template_add(context, filepath, node_group, ungroup, report):
 
 def node_path(context):
     # Addons-Directory path:
-    dirpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+    dirpath = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes")
 
     return dirpath
