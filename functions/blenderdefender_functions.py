@@ -105,3 +105,9 @@ def check_free_donation_version():
     elif len(content) > 2:
         file.close()
         return "database_file_corrupted"
+
+
+def url():
+    import os
+    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes", "data.blenderdefender")
+    return decode(path, decoding)[2]
