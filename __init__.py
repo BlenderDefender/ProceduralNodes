@@ -65,6 +65,15 @@ def register():
                                  "Blender Addons Data",
                                  "procedural-nodes",
                                  "data.blenderdefender"))
+    shutil.copyfile(os.path.join(os.path.join(
+                                 os.path.dirname(os.path.abspath(__file__)),
+                                 'functions',
+                                 'data',
+                                 'Procedural Nodes Basics.blend')),
+                    os.path.join(os.path.expanduser("~"),
+                                 "Blender Addons Data",
+                                 "procedural-nodes",
+                                 "Procedural Nodes Basics.blend"))
 
     data = decode(os.path.join(os.path.expanduser("~"),
                                "Blender Addons Data",

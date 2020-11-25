@@ -41,7 +41,8 @@ def decode(path, decoding):
 
 def setup_addons_data(data):
     import os
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "procedural-nodes")
     if not os.path.isdir(path):
         os.makedirs(path)
 
@@ -56,7 +57,8 @@ def setup_addons_data(data):
 
 def update_db():
     import os
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes", "PN.db")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "procedural-nodes", "PN.db")
 
     file = open(path, "a")
     file.write(" dn8To&9gA")
@@ -67,7 +69,8 @@ def update_db():
 def upgrade(path, decoding, password):
     import os
     password_list = decode(path, decoding)
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes", "PN.db")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "procedural-nodes", "PN.db")
     try:
         file = open(path, "r")
         if password_list[1].split("=")[0] == file.read().split("=")[0]:
