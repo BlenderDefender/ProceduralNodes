@@ -23,3 +23,10 @@ Wood:
 
 
 ![Open Headfile](/Screenshots/DefaultPackWoodRenderFinal.png?raw=true)
+
+## System requirements:
+| **OS** | **Blender** |
+| ------------- | ------------- |
+| OSX | Testing, please give feedback if it works for you. |
+| Windows | Blender 2.80+ |
+| Linux | Testing, please give feedback if it works for you. |
