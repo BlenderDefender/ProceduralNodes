@@ -83,7 +83,7 @@ def register():
     setup_addons_data(data[1])
 
     menus.register()
-    prefs.register()
+    prefs.register(bl_info)
     bpy.types.NODE_MT_add.append(menu_func)
 
 

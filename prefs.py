@@ -26,19 +26,6 @@ from . import addon_updater_ops
 
 from .functions.blenderdefender_functions import check_free_donation_version, url
 
-bl_info = {
-    "name": "Procedural Nodes",
-    "description": "Useful and cool node groups",
-    "author": "Blender Defender",
-    "version": (1, 1, 0),
-    "blender": (2, 80, 0),
-    "location": "Node Editors > Add > Procedural Nodes",
-    "description": "Add pre-made node groups to the node editors",
-    "warning": "Check Out Gumroad for extension packs and more",
-    "tracker_url": "https://github.com/BlenderDefender/ProceduralNodes/issues",
-    "category": "Node",
-}
-
 
 # -----------------------------------------------------------------------------
 # Addon Preferences
@@ -118,7 +105,7 @@ classes = (
 )
 
 
-def register():
+def register(bl_info):
     addon_updater_ops.register(bl_info)
     for cls in classes:
         bpy.utils.register_class(cls)
