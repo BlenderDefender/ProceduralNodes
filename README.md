@@ -4,7 +4,8 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/BlenderDefender/ProceduralNodes?style=for-the-badge)
 # ProceduralNodes
 
-Click there to access four cool Procedural Materials [(and here for extension packs and more)](https://gumroad.com/blenderdefender):
+Procedural Nodes helps you adding procedural Materials with one click.
+Click clone to access four cool Procedural Materials [(and here for extension packs and more)](https://gumroad.com/blenderdefender):
 
 ![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/picture1.png)
 
