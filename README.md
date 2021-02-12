@@ -6,27 +6,27 @@
 
 Click there to access four cool Procedural Materials [(and here for extension packs and more)](https://gumroad.com/blenderdefender):
 
-![Open Headfile](/Screenshots/picture1.png)
+![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/picture1.png)
 
 Fabric:
 
 
-![Open Headfile](/Screenshots/DefaultPackFabricRenderFinal.png)
+![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackFabricRenderFinal.png)
 
 Scales:
 
 
-![Open Headfile](/Screenshots/DefaultPackScalesRenderFinal.png)
+![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackScalesRenderFinal.png)
 
 Lava:
 
 
-![Open Headfile](/Screenshots/DefaultPackLavaRenderFinal.png)
+![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackLavaRenderFinal.png)
 
 Wood:
 
 
-![Open Headfile](/Screenshots/DefaultPackWoodRenderFinal.png)
+![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackWoodRenderFinal.png)
 
 ## System requirements:
 | **OS** | **Blender** |
