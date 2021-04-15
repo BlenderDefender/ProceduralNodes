@@ -1,4 +1,4 @@
-[![Donate](https://img.shields.io/badge/DONATE!%20Funding%20Goal%3A%20%24140%20(1%20Day%20Developer%20Time)-%240-red?style=for-the-badge&logo=paypal)](https://gumroad.com/blenderdefender)
+[![Donate](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FBlenderDefender%2FBlenderDefender%2Fshields_endpoint%2FPROCEDURALNODES.json)](https://gumroad.com/blenderdefender)
 
 
 ![GitHub](https://img.shields.io/github/license/BlenderDefender/ProceduralNodes?color=green&style=for-the-badge)
