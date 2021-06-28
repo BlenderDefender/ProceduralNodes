@@ -32,32 +32,32 @@ from .functions.blenderdefender_functions import check_free_donation_version, ur
 class PROCEDURALNODES_APT_preferences(AddonPreferences):
     bl_idname = __package__
 
-    auto_check_update = bpy.props.BoolProperty(
+    auto_check_update: bpy.props.BoolProperty(
         name="Auto-check for Update",
         description="If enabled, auto-check for updates using an interval",
         default=True,
     )
-    updater_intrval_months = bpy.props.IntProperty(
+    updater_intrval_months: bpy.props.IntProperty(
         name='Months',
         description="Number of months between checking for updates",
         default=0,
         min=0
     )
-    updater_intrval_days = bpy.props.IntProperty(
+    updater_intrval_days: bpy.props.IntProperty(
         name='Days',
         description="Number of days between checking for updates",
         default=7,
         min=0,
         max=31
     )
-    updater_intrval_hours = bpy.props.IntProperty(
+    updater_intrval_hours: bpy.props.IntProperty(
         name='Hours',
         description="Number of hours between checking for updates",
         default=0,
         min=0,
         max=23
     )
-    updater_intrval_minutes = bpy.props.IntProperty(
+    updater_intrval_minutes: bpy.props.IntProperty(
         name='Minutes',
         description="Number of minutes between checking for updates",
         default=0,
@@ -71,19 +71,28 @@ class PROCEDURALNODES_APT_preferences(AddonPreferences):
         col = mainrow.column()
 
         if check_free_donation_version() == "free":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
-            layout.label(text="Procedural Nodes - You are using the free version.")
-            layout.label(text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
+                            icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(
+                text="Procedural Nodes - You are using the free version.")
+            layout.label(
+                text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
             layout.operator("proceduralnodes.upgrade")
             layout.label(text="")
         elif check_free_donation_version() == "donation":
-            layout.label(text="Procedural Nodes - You are using the donation version. Thank you :)", icon='FUND')
-            layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url=url()
+            layout.label(
+                text="Procedural Nodes - You are using the donation version. Thank you :)", icon='FUND')
+            layout.operator(
+                "wm.url_open", text="Get discount code for cool Blender Products").url = url()
         elif check_free_donation_version() == "database_file_corrupted":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
-            layout.label(text="Procedural Nodes - Databasefile corrupted! Please delete it.")
-            layout.label(text="And please, stop messing around with .db files. Thanks :)")
-            layout.operator("proceduralnodes.upgrade", text="Upgrade to donation version.")
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
+                            icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(
+                text="Procedural Nodes - Databasefile corrupted! Please delete it.")
+            layout.label(
+                text="And please, stop messing around with .db files. Thanks :)")
+            layout.operator("proceduralnodes.upgrade",
+                            text="Upgrade to donation version.")
             layout.label(text="")
 
         layout.operator("proceduralnodes.install_file", icon="IMPORT")
