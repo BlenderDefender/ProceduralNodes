@@ -18,11 +18,20 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import bpy
+
+from .functions.dict.dict import decoding
+from .functions.blenderdefender_functions import setup_addons_data, decode
+from . import (
+    menus,
+    prefs,
+)
+
 bl_info = {
     "name": "Procedural Nodes",
     "description": "Useful and cool node groups",
     "author": "Blender Defender",
-    "version": (1, 1, 0),
+    "version": (1, 1, 1),
     "blender": (2, 80, 0),
     "location": "Node Editors > Add > Procedural Nodes",
     "description": "Add pre-made node groups to the node editors",
@@ -30,16 +39,6 @@ bl_info = {
     "tracker_url": "https://github.com/BlenderDefender/ProceduralNodes/issues",
     "category": "Node",
 }
-
-import bpy
-
-from . import (
-    menus,
-    prefs,
-)
-
-from .functions.blenderdefender_functions import setup_addons_data, decode
-from .functions.dict.dict import decoding
 
 
 def menu_func(self, context):
@@ -53,7 +52,8 @@ def menu_func(self, context):
 def register():
     import os
     import shutil
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "procedural-nodes")
     if not os.path.isdir(path):
         os.makedirs(path)
     shutil.copyfile(os.path.join(list(os.path.split(os.path.abspath(__file__)))[0],
