@@ -8,31 +8,28 @@
 # ProceduralNodes
 
 Procedural Nodes helps you adding procedural Materials with one click.
-Click clone to access four cool Procedural Materials [(and here for extension packs and more)](https://gumroad.com/blenderdefender):
+Click clone to access four cool Procedural Materials:
 
 ![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/picture1.png)
 
 Fabric:
 
-
 ![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackFabricRenderFinal.png)
 
 Scales:
-
 
 ![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackScalesRenderFinal.png)
 
 Lava:
 
-
 ![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackLavaRenderFinal.png)
 
 Wood:
 
-
 ![Open Headfile](https://github.com/BlenderDefender/ProceduralNodes/blob/master/Screenshots/DefaultPackWoodRenderFinal.png)
 
 ## System requirements:
+
 | **OS**  | **Blender**                                        |
 | ------- | -------------------------------------------------- |
 | OSX     | Testing, please give feedback if it works for you. |
