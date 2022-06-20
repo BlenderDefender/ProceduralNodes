@@ -1,6 +1,7 @@
+# Ignore IDE settings
 .vscode/
 
+# Ignore run artifacts.
 *.pyc
-__pychache__/
-
-*updater/
+__pycache__/
+*_updater/
